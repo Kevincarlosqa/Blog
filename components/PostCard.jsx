@@ -6,7 +6,7 @@ import Image from "next/image";
 const PostCard = ({ post }) => {
   console.log(post);
   return (
-    <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
+    <div className="bg-black bg-opacity-80 text-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md pb-80 mb-6">
         <Image
           src={post.featuredImage.url}
@@ -32,11 +32,11 @@ const PostCard = ({ post }) => {
             className="align-middle rounded-full"
             as="image"
           />
-          <p className="inline align-middle text-gray-700 ml-2 text-lg">
+          <p className="inline align-middle text-white ml-2 text-lg">
             {post.author.name}
           </p>
         </div>
-        <div className="font-medium text-gray-700">
+        <div className="font-medium text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 inline mr-2 text-pink-500"
@@ -54,7 +54,7 @@ const PostCard = ({ post }) => {
           <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
         </div>
       </div>
-      <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
+      <p className="text-center text-lg text-white font-normal px-4 lg:px-20 mb-8">
         {post.excerpt}
       </p>
       <div className="text-center">

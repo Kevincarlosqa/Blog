@@ -1,10 +1,13 @@
 import Image from "next/image";
 import React from "react";
 import moment from "moment";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { coy } from "react-syntax-highlighter/dist/cjs/styles/prism/coy";
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text;
+    console.log(post.content.raw.children);
 
     if (obj) {
       if (obj.bold) {
@@ -23,7 +26,7 @@ const PostDetail = ({ post }) => {
     switch (type) {
       case "heading-three":
         return (
-          <h3 key={index} className="text-xl font-semibold mb-4">
+          <h3 key={index} className="text-xl font-semibold mb-4 text-white">
             {modifiedText.map((item, i) => (
               <React.Fragment key={i}>{item}</React.Fragment>
             ))}
@@ -31,7 +34,7 @@ const PostDetail = ({ post }) => {
         );
       case "paragraph":
         return (
-          <p key={index} className="mb-8">
+          <p key={index} className="mb-8 text-white">
             {modifiedText.map((item, i) => (
               <React.Fragment key={i}>{item}</React.Fragment>
             ))}
@@ -39,7 +42,7 @@ const PostDetail = ({ post }) => {
         );
       case "heading-four":
         return (
-          <h4 key={index} className="text-md font-semibold mb-4">
+          <h4 key={index} className="text-md font-semibold mb-4 text-white">
             {modifiedText.map((item, i) => (
               <React.Fragment key={i}>{item}</React.Fragment>
             ))}
@@ -55,13 +58,39 @@ const PostDetail = ({ post }) => {
             src={obj.src}
           />
         );
+      case "code-block":
+        return (
+          // <code
+          //   key={index}
+          //   className="bg-gray-800 overflow-y-scroll rounded-md p-2 text-sm text-white"
+          // >
+          // {modifiedText.map((item, i) => (
+          //   <React.Fragment key={i}>{item}</React.Fragment>
+          // ))}
+          // </code>
+
+          <pre className="bg-gray-800 p-4 rounded-lg">
+            <code className="block text-white">
+              {" "}
+              {modifiedText.map((item, i) => (
+                <React.Fragment key={i}>{item}</React.Fragment>
+              ))}
+            </code>
+          </pre>
+
+          // <SyntaxHighlighter language="javascript" style={coy}>
+          //   {modifiedText.map((item, i) => (
+          //     <React.Fragment key={i}>{item}</React.Fragment>
+          //   ))}
+          // </SyntaxHighlighter>
+        );
       default:
         return modifiedText;
     }
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+    <div className="bg-black bg-opacity-80 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white">
       <div className="relative overflow-hidden shadow-md mb-6">
         <Image
           src={post.featuredImage.url}
@@ -81,11 +110,11 @@ const PostDetail = ({ post }) => {
               className="align-middle rounded-full"
               as="image"
             />
-            <p className="inline align-middle text-gray-700 ml-2 text-lg">
+            <p className="inline align-middle text-white ml-2 text-lg">
               {post.author.name}
             </p>
           </div>
-          <div className="font-medium text-gray-700">
+          <div className="font-medium text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 inline mr-2 text-pink-500"
@@ -103,8 +132,9 @@ const PostDetail = ({ post }) => {
             <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
           </div>
         </div>
-        <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
+        <h1 className="mb-8 text-3xl font-semibold ">{post.title}</h1>
         {post.content.raw.children.map((typeObj, index) => {
+          console.log(typeObj.children);
           const children = typeObj.children.map((item, itemIndex) =>
             getContentFragment(itemIndex, item.text, item)
           );
