@@ -77,6 +77,9 @@ const FeaturedPosts = () => {
     <div className="mb-8">
       <Carousel
         infinite
+        // autoplay
+        // autoPlaySpeed={1000}
+        // shouldResetAutoplay
         customLeftArrow={customLeftArrow}
         customRightArrow={customRightArrow}
         responsive={responsive}
@@ -92,3 +95,42 @@ const FeaturedPosts = () => {
 };
 
 export default FeaturedPosts;
+
+// infinite
+//         autoplay
+//         autoPlaySpeed={1000}
+//         shouldResetAutoplay
+//         customLeftArrow={customLeftArrow}
+//         customRightArrow={customRightArrow}
+//         responsive={responsive}
+//         itemClass="px-4"
+
+// // additionalTransfrom={0}
+//         // arrows
+//         autoPlay
+//         autoPlaySpeed={1500}
+//         centerMode={false}
+//         className=""
+//         // containerClass="container-with-dots"
+//         dotListClass=""
+//         // draggable={true}
+//         focusOnSelect={false}
+//         infinite
+//         itemClass="px-4"
+//         // keyBoardControl
+//         // minimumTouchDrag={80}
+//         // pauseOnHover
+//         renderArrowsWhenDisabled={false}
+//         renderButtonGroupOutside={false}
+//         renderDotsOutside={false}
+//         responsive={responsive}
+//         rewind={false}
+//         rewindWithAnimation={false}
+//         rtl={false}
+//         // shouldResetAutoplay
+//         showDots={false}
+//         // sliderClass=""
+//         slidesToSlide={1}
+//         // swipeable
+//         customLeftArrow={customLeftArrow}
+//         customRightArrow={customRightArrow}

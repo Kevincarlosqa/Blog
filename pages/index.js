@@ -5,16 +5,21 @@ import { PostCard, Categories, PostWidget } from "@/components";
 import { getPosts } from "@/services";
 import { FeaturedPosts } from "@/sections";
 
+import Lottie from "lottie-react";
+import meditate from "../public/meditate.json";
+import developer from "../public/developer2.json";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ posts }) {
   // console.log(JSON.parse(posts));
   return (
-    <div className="container mx-auto px-10 mb-8">
+    <div className="container mx-auto px-4 lg:px-10 mb-8">
       <Head>
         <title>Kevin Blog</title>
         <link />
       </Head>
+
       <FeaturedPosts />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
@@ -24,7 +29,9 @@ export default function Home({ posts }) {
         </div>
         <div className="lg:col-span-4 col-span-1">
           <div className="lg:sticky relative top-8">
+            <Lottie loop={true} animationData={meditate} />
             <PostWidget />
+            <Lottie loop={true} animationData={developer} />
             <Categories />
           </div>
         </div>

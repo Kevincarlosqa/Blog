@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import { getCategories, getCategoryPost } from "../../services";
 import { PostCard, Categories, Loader } from "../../components";
 
+import Lottie from "lottie-react";
+import dev from "../../public/dev2.json";
+
 const CategoryPost = ({ posts }) => {
   const router = useRouter();
 
@@ -12,7 +15,7 @@ const CategoryPost = ({ posts }) => {
   }
 
   return (
-    <div className="container mx-auto px-10 mb-8">
+    <div className="container mx-auto px-4 lg:px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="col-span-1 lg:col-span-8">
           {posts.map((post, index) => (
@@ -21,6 +24,7 @@ const CategoryPost = ({ posts }) => {
         </div>
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
+            <Lottie animationData={dev} loop={true} />
             <Categories />
           </div>
         </div>
@@ -43,6 +47,7 @@ export async function getStaticProps({ params }) {
 // The HTML is generated at build time and will be reused on each request.
 export async function getStaticPaths() {
   const categories = await getCategories();
+  console.log(categories);
   return {
     paths: categories.map(({ slug }) => ({ params: { slug } })),
     fallback: true,

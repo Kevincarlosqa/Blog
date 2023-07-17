@@ -69,8 +69,8 @@ const PostDetail = ({ post }) => {
           // ))}
           // </code>
 
-          <pre className="bg-gray-800 p-4 rounded-lg">
-            <code className="block text-white">
+          <pre className="bg-gray-800 p-4 rounded-lg w-full md:text-sm overflow-x-scroll overflow-visible lg:overflow-x-hidden">
+            <code className=" text-white">
               {" "}
               {modifiedText.map((item, i) => (
                 <React.Fragment key={i}>{item}</React.Fragment>
@@ -90,7 +90,7 @@ const PostDetail = ({ post }) => {
   };
 
   return (
-    <div className="bg-black bg-opacity-80 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white">
+    <div className="bg-black bg-opacity-80 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
       <div className="relative overflow-hidden shadow-md mb-6">
         <Image
           src={post.featuredImage.url}
@@ -100,7 +100,7 @@ const PostDetail = ({ post }) => {
         />
       </div>
       <div className="px-4 lg:px-0">
-        <div className="flex items-center mb-8 w-full ">
+        <div className="flex items-center mb-8 w-full justify-between">
           <div className="flex items-center  mb-4 lg:mb-0 w-full lg:w-auto mr-8">
             <Image
               src={post.author.photo.url}
@@ -110,11 +110,11 @@ const PostDetail = ({ post }) => {
               className="align-middle rounded-full"
               as="image"
             />
-            <p className="inline align-middle text-white ml-2 text-lg">
+            <p className="inline align-middle text-white ml-2 lg:text-lg text-sm">
               {post.author.name}
             </p>
           </div>
-          <div className="font-medium text-white">
+          <div className="font-medium text-white flex flex-row">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 inline mr-2 text-pink-500"
@@ -129,10 +129,14 @@ const PostDetail = ({ post }) => {
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
+            <span className="flex flex-row">
+              {moment(post.createdAt).format("MMM DD, YYYY")}
+            </span>
           </div>
         </div>
-        <h1 className="mb-8 text-3xl font-semibold ">{post.title}</h1>
+        <h1 className="mb-8 lg:text-3xl font-semibold text-center text-2xl">
+          {post.title}
+        </h1>
         {post.content.raw.children.map((typeObj, index) => {
           console.log(typeObj.children);
           const children = typeObj.children.map((item, itemIndex) =>
