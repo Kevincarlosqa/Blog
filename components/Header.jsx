@@ -12,9 +12,9 @@ const Header = () => {
     getCategories().then((newCategories) => setCategories(newCategories));
   }, []);
   return (
-    <div className="container mx-auto px-4 lg:px-10 mb-8 ">
+    <div className="container mx-auto px-3 lg:px-3 mb-8 ">
       <div className="border-b w-full  border-gray-400 py-5 lg:py-7 flex flex-row justify-center flex-wrap lg:inline-block align-middle">
-        <div className="md: float-left block">
+        <div className="md: float-left block mt-1">
           <Link href="/">
             {/* <span className="cursor-pointer font-bold text-4xl text-white">
               Kevin Blog
@@ -33,7 +33,7 @@ const Header = () => {
               <p>
                 {"  "}
                 <span className="md:float-right align-middle text-white ml-4 font-semibold cursor-pointer">
-                  | {category.name}
+                  {category.name}
                 </span>
               </p>
             </Link>

@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home({ posts }) {
   // console.log(JSON.parse(posts));
   return (
-    <div className="container mx-auto px-4 lg:px-10 mb-8">
+    <div className="container mx-auto px-3 lg:px-3 mb-8">
       <Head>
         <title>Kevin Blog</title>
         <link />
