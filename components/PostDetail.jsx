@@ -168,8 +168,28 @@ const PostDetail = ({ post }) => {
           <RichText
             content={post.content.raw}
             renderers={{
+              p: ({ children }) => (
+                <>
+                  <p className="text-white">{children}</p>
+                  <br />
+                </>
+              ),
               h1: ({ children }) => <h1 className="text-white">{children}</h1>,
               bold: ({ children }) => <strong>{children}</strong>,
+              blockquote: ({ children }) => (
+                <>
+                  <blockquote
+                    style={{
+                      paddingLeft: "16px",
+                      borderLeft: "4px solid blue",
+                      fontSize: "15px",
+                    }}
+                  >
+                    {children}
+                  </blockquote>
+                  <br />
+                </>
+              ),
               a: ({ children, openInNewTab, href, rel, ...rest }) => {
                 if (href.match(/^https?:\/\/|^\/\//i)) {
                   return (
@@ -195,21 +215,24 @@ const PostDetail = ({ post }) => {
               },
               code_block: ({ children }) => {
                 return (
-                  <pre
-                    className="language-js"
-                    style={{
-                      background: "black",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <code
+                  <>
+                    <pre
+                      className="language-js"
                       style={{
                         background: "black",
+                        borderRadius: "10px",
                       }}
                     >
-                      {children}
-                    </code>
-                  </pre>
+                      <code
+                        style={{
+                          background: "black",
+                        }}
+                      >
+                        {children}
+                      </code>
+                    </pre>
+                    <br />
+                  </>
                 );
               },
             }}
