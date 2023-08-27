@@ -19,102 +19,102 @@ const PostDetail = ({ post }) => {
     highlight(); // <--- call the async function
   }, [post]); // <--- run when post updates
 
-  const getContentFragment = (index, text, obj, type) => {
-    let modifiedText = text;
-    // let link = href;
-    // console.log(post.content.raw.children);
-    // console.log(modifiedText);
-    // if (link) {
-    //   return <h1>link</h1>;
-    // }
+  // const getContentFragment = (index, text, obj, type) => {
+  //   let modifiedText = text;
+  //   // let link = href;
+  //   // console.log(post.content.raw.children);
+  //   // console.log(modifiedText);
+  //   // if (link) {
+  //   //   return <h1>link</h1>;
+  //   // }
 
-    if (obj) {
-      if (obj.bold) {
-        modifiedText = <b key={index}>{text}</b>;
-      }
+  //   if (obj) {
+  //     if (obj.bold) {
+  //       modifiedText = <b key={index}>{text}</b>;
+  //     }
 
-      if (obj.italic) {
-        modifiedText = <em key={index}>{text}</em>;
-      }
+  //     if (obj.italic) {
+  //       modifiedText = <em key={index}>{text}</em>;
+  //     }
 
-      if (obj.underline) {
-        modifiedText = <u key={index}>{text}</u>;
-      }
-    }
+  //     if (obj.underline) {
+  //       modifiedText = <u key={index}>{text}</u>;
+  //     }
+  //   }
 
-    switch (type) {
-      case "heading-three":
-        return (
-          <h3 key={index} className="text-xl font-semibold mb-4 text-white">
-            {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
-            ))}
-          </h3>
-        );
-      case "paragraph":
-        return (
-          <p key={index} className="mb-8 text-white">
-            {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
-            ))}
-          </p>
-        );
-      case "heading-four":
-        return (
-          <h4 key={index} className="text-md font-semibold mb-4 text-white">
-            {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
-            ))}
-          </h4>
-        );
-      case "image":
-        return (
-          <Image
-            key={index}
-            alt={obj.title}
-            height={obj.height}
-            width={obj.width}
-            src={obj.src}
-          />
-        );
-      case "code-block":
-        return (
-          // <code
-          //   key={index}
-          //   className="bg-gray-800 overflow-y-scroll rounded-md p-2 text-sm text-white"
-          // >
-          // {modifiedText.map((item, i) => (
-          //   <React.Fragment key={i}>{item}</React.Fragment>
-          // ))}
-          // </code>
+  //   switch (type) {
+  //     case "heading-three":
+  //       return (
+  //         <h3 key={index} className="text-xl font-semibold mb-4 text-white">
+  //           {modifiedText.map((item, i) => (
+  //             <React.Fragment key={i}>{item}</React.Fragment>
+  //           ))}
+  //         </h3>
+  //       );
+  //     case "paragraph":
+  //       return (
+  //         <p key={index} className="mb-8 text-white">
+  //           {modifiedText.map((item, i) => (
+  //             <React.Fragment key={i}>{item}</React.Fragment>
+  //           ))}
+  //         </p>
+  //       );
+  //     case "heading-four":
+  //       return (
+  //         <h4 key={index} className="text-md font-semibold mb-4 text-white">
+  //           {modifiedText.map((item, i) => (
+  //             <React.Fragment key={i}>{item}</React.Fragment>
+  //           ))}
+  //         </h4>
+  //       );
+  //     case "image":
+  //       return (
+  //         <Image
+  //           key={index}
+  //           alt={obj.title}
+  //           height={obj.height}
+  //           width={obj.width}
+  //           src={obj.src}
+  //         />
+  //       );
+  //     case "code-block":
+  //       return (
+  //         // <code
+  //         //   key={index}
+  //         //   className="bg-gray-800 overflow-y-scroll rounded-md p-2 text-sm text-white"
+  //         // >
+  //         // {modifiedText.map((item, i) => (
+  //         //   <React.Fragment key={i}>{item}</React.Fragment>
+  //         // ))}
+  //         // </code>
 
-          <pre className="bg-gray-800 p-4 rounded-lg w-full md:text-sm overflow-x-scroll overflow-visible lg:overflow-x-hidden">
-            <code className=" text-white">
-              {" "}
-              {modifiedText.map((item, i) => (
-                <React.Fragment key={i}>{item}</React.Fragment>
-              ))}
-            </code>
-          </pre>
+  //         <pre className="bg-gray-800 p-4 rounded-lg w-full md:text-sm overflow-x-scroll overflow-visible lg:overflow-x-hidden">
+  //           <code className=" text-white">
+  //             {" "}
+  //             {modifiedText.map((item, i) => (
+  //               <React.Fragment key={i}>{item}</React.Fragment>
+  //             ))}
+  //           </code>
+  //         </pre>
 
-          // <SyntaxHighlighter language="javascript" style={coy}>
-          //   {modifiedText.map((item, i) => (
-          //     <React.Fragment key={i}>{item}</React.Fragment>
-          //   ))}
-          // </SyntaxHighlighter>
-        );
-      case "href":
-        return (
-          <Link href={obj.href}>
-            {modifiedText.map((item, i) => (
-              <React.Fragment key={i}>hello</React.Fragment>
-            ))}
-          </Link>
-        );
-      default:
-        return modifiedText;
-    }
-  };
+  //         // <SyntaxHighlighter language="javascript" style={coy}>
+  //         //   {modifiedText.map((item, i) => (
+  //         //     <React.Fragment key={i}>{item}</React.Fragment>
+  //         //   ))}
+  //         // </SyntaxHighlighter>
+  //       );
+  //     case "href":
+  //       return (
+  //         <Link href={obj.href}>
+  //           {modifiedText.map((item, i) => (
+  //             <React.Fragment key={i}>hello</React.Fragment>
+  //           ))}
+  //         </Link>
+  //       );
+  //     default:
+  //       return modifiedText;
+  //   }
+  // };
 
   return (
     <div className="bg-black bg-opacity-[85%] shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
@@ -205,7 +205,7 @@ const PostDetail = ({ post }) => {
                       target={openInNewTab ? "_blank" : "_self"}
                       rel={rel || "noopener noreferrer"}
                       {...rest}
-                      className="text-blue-500"
+                      className="text-blue-500 "
                     >
                       {children}
                     </a>
