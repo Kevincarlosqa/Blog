@@ -175,6 +175,12 @@ const PostDetail = ({ post }) => {
                 </>
               ),
               h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+              h3: ({ children }) => (
+                <>
+                  <h3 className="text-white font-bold text-2xl">{children}</h3>{" "}
+                  <br />{" "}
+                </>
+              ),
               bold: ({ children }) => <strong>{children}</strong>,
               blockquote: ({ children }) => (
                 <>
