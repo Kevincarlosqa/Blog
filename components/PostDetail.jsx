@@ -117,13 +117,14 @@ const PostDetail = ({ post }) => {
   };
 
   return (
-    <div className="bg-black bg-opacity-90 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
+    <div className="bg-black bg-opacity-[85%] shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
       <div className="relative overflow-hidden shadow-md mb-6">
         <Image
           src={post.featuredImage.url}
           alt={post.title}
           width={750}
           height={750}
+          className="w-full object-cover rounded-lg"
         />
       </div>
       <div className="px-4 lg:px-0">
@@ -221,7 +222,7 @@ const PostDetail = ({ post }) => {
               },
               code_block: ({ children }) => {
                 return (
-                  <>
+                  <div>
                     <pre
                       className="language-js"
                       style={{
@@ -237,8 +238,7 @@ const PostDetail = ({ post }) => {
                         {children}
                       </code>
                     </pre>
-                    <br />
-                  </>
+                  </div>
                 );
               },
             }}
