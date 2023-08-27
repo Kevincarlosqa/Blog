@@ -1,13 +1,32 @@
+import Prism from "prismjs";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
+import "prismjs/themes/prism-funky.css";
+// import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import "prismjs/components/prism-jsx";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/cjs/styles/prism/coy";
+import Link from "next/link";
+import { RichText } from "@graphcms/rich-text-react-renderer";
 
 const PostDetail = ({ post }) => {
+  useEffect(() => {
+    const highlight = async () => {
+      await Prism.highlightAll(); // <--- prepare Prism
+    };
+    highlight(); // <--- call the async function
+  }, [post]); // <--- run when post updates
+
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text;
-    console.log(post.content.raw.children);
+    // let link = href;
+    // console.log(post.content.raw.children);
+    // console.log(modifiedText);
+    // if (link) {
+    //   return <h1>link</h1>;
+    // }
 
     if (obj) {
       if (obj.bold) {
@@ -84,13 +103,21 @@ const PostDetail = ({ post }) => {
           //   ))}
           // </SyntaxHighlighter>
         );
+      case "href":
+        return (
+          <Link href={obj.href}>
+            {modifiedText.map((item, i) => (
+              <React.Fragment key={i}>hello</React.Fragment>
+            ))}
+          </Link>
+        );
       default:
         return modifiedText;
     }
   };
 
   return (
-    <div className="bg-black bg-opacity-80 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
+    <div className="bg-black bg-opacity-90 shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
       <div className="relative overflow-hidden shadow-md mb-6">
         <Image
           src={post.featuredImage.url}
@@ -101,7 +128,7 @@ const PostDetail = ({ post }) => {
       </div>
       <div className="px-4 lg:px-0">
         <div className="flex items-center mb-8 w-full justify-between">
-          <div className="flex items-center  mb-4 lg:mb-0 w-full lg:w-auto mr-8">
+          <div className="flex items-center  lg:mb-0 lg:w-auto mr-8">
             <Image
               src={post.author.photo.url}
               alt={post.author.name}
@@ -114,7 +141,7 @@ const PostDetail = ({ post }) => {
               {post.author.name}
             </p>
           </div>
-          <div className="font-medium text-white flex flex-row">
+          <div className="font-medium text-white flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 inline mr-2 text-pink-500"
@@ -137,13 +164,106 @@ const PostDetail = ({ post }) => {
         <h1 className="mb-8 lg:text-3xl font-semibold text-center text-2xl">
           {post.title}
         </h1>
-        {post.content.raw.children.map((typeObj, index) => {
-          console.log(typeObj.children);
-          const children = typeObj.children.map((item, itemIndex) =>
-            getContentFragment(itemIndex, item.text, item)
-          );
-          return getContentFragment(index, children, typeObj, typeObj.type);
-        })}
+        {
+          <RichText
+            content={post.content.raw}
+            renderers={{
+              h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+              bold: ({ children }) => <strong>{children}</strong>,
+              a: ({ children, openInNewTab, href, rel, ...rest }) => {
+                if (href.match(/^https?:\/\/|^\/\//i)) {
+                  return (
+                    <a
+                      href={href}
+                      target={openInNewTab ? "_blank" : "_self"}
+                      rel={rel || "noopener noreferrer"}
+                      {...rest}
+                      className="text-blue-500"
+                    >
+                      {children}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link href={href} className="text-blue-500">
+                    <a {...rest} className="text-blue-500">
+                      {children}
+                    </a>
+                  </Link>
+                );
+              },
+              code_block: ({ children }) => {
+                return (
+                  <pre
+                    className="language-js"
+                    style={{
+                      background: "black",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <code
+                      style={{
+                        background: "black",
+                      }}
+                    >
+                      {children}
+                    </code>
+                  </pre>
+                );
+              },
+            }}
+          />
+        }
+        {/* {post.content.raw.children.map((typeObj, index) => {
+          console.log(typeObj);
+          // let link = null;
+          // const children = typeObj.children.map((item, itemIndex) => {
+          //   // console.log(item.href);
+          //   // if (item.href) link = item.href;
+          //   return getContentFragment(itemIndex, item.text, item);
+          // });
+          // // console.log(children);
+          // return getContentFragment(
+          //   index,
+          //   children,
+          //   typeObj,
+          //   typeObj.type
+          //   // link
+          // );
+          <RichText
+            content={typeObj}
+            renderers={{
+              h1: ({ children }) => (
+                <h1 className="text-blue-500">{children}</h1>
+              ),
+              bold: ({ children }) => <strong>{children}</strong>,
+              a: ({ children, openInNewTab, href, rel, ...rest }) => {
+                if (href.match(/^https?:\/\/|^\/\//i)) {
+                  return (
+                    <a
+                      href={href}
+                      target={openInNewTab ? "_blank" : "_self"}
+                      rel={rel || "noopener noreferrer"}
+                      {...rest}
+                      className="text-blue-500"
+                    >
+                      {children}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link href={href} className="text-blue-500">
+                    <a {...rest} className="text-blue-500">
+                      {children}
+                    </a>
+                  </Link>
+                );
+              },
+            }}
+          />;
+        })} */}
       </div>
     </div>
   );
