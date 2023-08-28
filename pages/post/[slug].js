@@ -80,7 +80,7 @@ import { getPosts, getPostDetails } from "@/services";
 import { AdjacentPosts } from "../../sections";
 
 import Lottie from "lottie-react";
-import dev from "../../public/dev3.json";
+import dev from "../../public/dev4.json";
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
