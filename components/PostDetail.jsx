@@ -117,7 +117,7 @@ const PostDetail = ({ post }) => {
   // };
 
   return (
-    <div className="bg-black bg-opacity-[85%] shadow-lg rounded-lg lg:p-8 pb-12 mb-8 text-white w-full">
+    <div className="bg-black bg-opacity-[85%] shadow-lg rounded-lg lg:p-8 pb-12 xl:mb-8 mb-0 text-white w-full">
       <div className="relative overflow-hidden shadow-md mb-6">
         <Image
           src={post.featuredImage.url}
@@ -176,6 +176,8 @@ const PostDetail = ({ post }) => {
                 </>
               ),
               h1: ({ children }) => <h1 className="text-white">{children}</h1>,
+              ol: ({ children }) => <li className="text-white">{children}</li>,
+              ul: ({ children }) => <li className="text-white">{children}</li>,
               h3: ({ children }) => (
                 <>
                   <h3 className="text-white font-bold text-2xl">{children}</h3>{" "}
